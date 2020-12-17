@@ -14,11 +14,9 @@ else:
 
     # --- Prepare data from argument file ---
     # Open and read json file
-    json_data = open(sys.argv[1])
-    # Convert json to Python dictionary
-    data = json.loads(json_data)
-    # Close the file
-    json_data.close()
+    with open(sys.argv[1]) as json_data:
+        # Convert json to Python dictionary
+        data = json.load(json_data)
 
     # --- Create/Open connection to database
     # create connection to database
@@ -37,16 +35,14 @@ else:
 
     # Loop through data dictionary and enter into database
     for entry in data:
-        row_info = (
+        # Insert a row of data
+        c.execute("INSERT INTO spells VALUES (?,?,?,?,?,?,?,?,?,?,?)", (
             entry["duration"], entry["components"],
             entry["saving_throw"], entry["school"],
             entry["spell_level"], entry["name"],
             entry["range"], entry["description"],
             entry["source"], entry["targets"],
-            entry["casting_time"])
-
-        # Insert a row of data
-        c.execute("INSERT INTO spells VALUES (?,?,?,?,?,?,?,?,?,?,?", row_info)
+            entry["casting_time"]))
         # Save (commit) the changes
         conn.commit()
 
