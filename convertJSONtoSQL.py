@@ -17,7 +17,7 @@ else:
 
     # --- Prepare data from argument file ---
     # Open and read json file
-    with open(sys.argv[1]) as json_data:
+    with open(sys.argv[1], encoding="utf8") as json_data:
         # Convert json to Python dictionary
         data = json.load(json_data)
 
