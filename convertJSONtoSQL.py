@@ -3,12 +3,15 @@ import sqlite3
 import json
 
 # Check if no argument was provided
-if len(sys.argv) <= 1:
-    print("Please provide an argument: py convertJSONtoSQL.py {filename}.json")
+if len(sys.argv) <= 2:
+    print("Please provide both arguments: py convertJSONtoSQL.py {filename}.json {databasename}.db")
 
 # Check if argument provided is anything besides .json file
 elif not sys.argv[1].endswith(".json"):
-    print("Argument must be a .json file: py convertJSONtoSQL.py {filename}.json")
+    print("First argument must be a .json file: py convertJSONtoSQL.py {filename}.json {databasename}.db")
+
+elif not sys.argv[2].endswith(".db"):
+    print("Second argument must be a .db name: py convertJSONtoSQL.py {filename}.json {databasename}.db")
 
 else:
 
@@ -20,7 +23,7 @@ else:
 
     # --- Create/Open connection to database
     # create connection to database
-    conn = sqlite3.connect('pathfinderSpellbook.db')
+    conn = sqlite3.connect(sys.argv[2])
     # create cursor to the database
     c = conn.cursor()
 
