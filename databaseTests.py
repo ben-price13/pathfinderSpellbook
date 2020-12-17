@@ -1,21 +1,21 @@
 import unittest
 import sqlite3
+import sys
+import os
 
-class TestStringMethods(unittest.TestCase):
+class TestConvertJSONToSQL(unittest.TestCase):
+    def setUp(self):
+        os.system('py convertJSONtoSQL.py testData.json test.db')
+        self.conn = sqlite3.connect('test.db')
+        self.c = conn.cursor()
 
-    def test_upper(self):
-        self.assertEqual('foo'.upper(), 'FOO')
+    def test_spells_table_exists(self):
+        self.c.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='spells'");
+        self.assertEqual(1, len(self.c.fetchall()))
 
-    def test_isupper(self):
-        self.assertTrue('FOO'.isupper())
-        self.assertFalse('Foo'.isupper())
-
-    def test_split(self):
-        s = 'hello world'
-        self.assertEqual(s.split(), ['hello', 'world'])
-        # check that s.split fails when the separator is not a string
-        with self.assertRaises(TypeError):
-            s.split(2)
+    def tearDown(self):
+        os.system(del test.db)
+        self.conn.close()
 
 if __name__ == '__main__':
     unittest.main()
