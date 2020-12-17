@@ -33,7 +33,7 @@ else:
     if not c.fetchall():
         # Create table
         c.execute('''CREATE TABLE spells
-                     (duration, components, saving_throw, school, spell_level, name,
+                     (id INTEGER PRIMARY KEY, duration, components, saving_throw, school, spell_level, name,
                      range, description, source, targets, casting_time)''')
 
     # Loop through data dictionary and enter into database
