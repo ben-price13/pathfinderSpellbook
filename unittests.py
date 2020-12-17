@@ -23,6 +23,10 @@ class TestConvertJSONToSQL(unittest.TestCase):
         self.c.execute("SELECT name FROM spells")
         self.assertEqual(4, len(self.c.fetchall()) )
 
+    def test_rowid(self):
+        self.c.execute("SELECT ROWID FROM spells WHERE name='Acid Fog'")
+        self.assertEqual(2, self.c.fetchone()[0])
+
     def tearDown(self):
         print("---> deleting test.db...\n")
         self.conn.close()
