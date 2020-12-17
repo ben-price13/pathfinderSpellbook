@@ -38,16 +38,19 @@ else:
 
     # Loop through data dictionary and enter into database
     for entry in data:
-        # Insert a row of data
-        c.execute("INSERT INTO spells VALUES (?,?,?,?,?,?,?,?,?,?,?)", (
-            entry["duration"], entry["components"],
-            entry["saving_throw"], entry["school"],
-            entry["spell_level"], entry["name"],
-            entry["range"], entry["description"],
-            entry["source"], entry["targets"],
-            entry["casting_time"]))
-        # Save (commit) the changes
-        conn.commit()
+        # Check if data exists in table
+        c.execute("SELECT name FROM spells WHERE name=?", (entry["name"],) )
+        if len(c.fetchall()) < 1:
+            # Insert a row of data
+            c.execute("INSERT INTO spells VALUES (?,?,?,?,?,?,?,?,?,?,?)", (
+                entry["duration"], entry["components"],
+                entry["saving_throw"], entry["school"],
+                entry["spell_level"], entry["name"],
+                entry["range"], entry["description"],
+                entry["source"], entry["targets"],
+                entry["casting_time"]))
+            # Save (commit) the changes
+            conn.commit()
 
     # close the connection to the database
     conn.close()
