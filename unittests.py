@@ -11,7 +11,7 @@ class TestConvertJSONToSQL(unittest.TestCase):
         self.c = self.conn.cursor()
 
     def test_spells_table_exists(self):
-        self.c.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='spells'");
+        self.c.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='spells'")
         self.assertEqual(1, len(self.c.fetchall()))
 
     def test_spell_names(self):
@@ -26,6 +26,10 @@ class TestConvertJSONToSQL(unittest.TestCase):
     def test_rowid(self):
         self.c.execute("SELECT ROWID FROM spells WHERE name='Acid Fog'")
         self.assertEqual(2, self.c.fetchone()[0])
+
+    def test_class_and_level(self):
+        self.c.execute("SELECT name, sorcerer FROM spells WHERE sorcerer IS NOT '-1'")
+        self.assertEqual([('Acid Arrow', '2'), ('Acid Fog', '6'), ('Acid Splash', '0')], self.c.fetchall())
 
     def tearDown(self):
         print("---> deleting test.db...\n")
