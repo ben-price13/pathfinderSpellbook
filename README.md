@@ -17,13 +17,17 @@ There will be two ways to run the flask server for the website on a local system
 
 1) Run the python script 'run.py' from the command line.  Currently this option works for Windows systems only.
 
-2) Alternatively, for Windows you can use the following commands in sequence:
+2) Alternatively, you can run the flask set up commands directly.
+
+For Windows you can use the following commands in sequence:
 'set FLASK_APP=flaskr'
 'flask run'
 
 For Linux or Mac, navigate use the commands in sequence:
 'export FLASK_APP=flaskr'
 'flask run'
+
+Once flask is running, open a web browser and navigate to the port listed on the command line to view the website.
 
 Further information on running a flask program can be found in the documentation:
 https://flask.palletsprojects.com/en/1.1.x/quickstart/#a-minimal-application
@@ -34,5 +38,5 @@ Currently, the following python scripts utilize the python unittests library to 
 
 **unittests.py**
 - This file includes the class TestConvertJSONtoSQL that tests the script which creates a database from a json file of spell data.  In particular, this script is utilized to convert PathfinderSpells.json to pathfinderSpellbook.db.  If ANY changes are made to the script convertJSONtoSQL.py, then this test script should be run to ensure no bugs were inserted into the codebase.  If all tests pass, then convertJSONtoSQL.py should be run as follows (on Windows cmd) to rebuild the database:
-'del pathfinderSpellbook.db'
-'py convertJSONtoSQL PathfinderSpells.json pathfinderSpellbook.db'
+<code>'del pathfinderSpellbook.db'
+'py convertJSONtoSQL PathfinderSpells.json pathfinderSpellbook.db'</code>
