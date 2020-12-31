@@ -38,6 +38,5 @@ Currently, the following python scripts utilize the python unittests library to 
 
 **unittests.py**
 - This file includes the class TestConvertJSONtoSQL that tests the script which creates a database from a json file of spell data.  In particular, this script is utilized to convert PathfinderSpells.json to pathfinderSpellbook.db.  If ANY changes are made to the script convertJSONtoSQL.py, then this test script should be run to ensure no bugs were inserted into the codebase.  If all tests pass, then convertJSONtoSQL.py should be run as follows (on Windows cmd) to rebuild the database:  
-<code>
 'del pathfinderSpellbook.db'  
-'py convertJSONtoSQL PathfinderSpells.json pathfinderSpellbook.db'</code>
+'py convertJSONtoSQL PathfinderSpells.json pathfinderSpellbook.db'
